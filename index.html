@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PureSoft ChatBot</title>
+  <title>PureSoft AI Agent</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
   <style>
     :root {
@@ -17,6 +17,7 @@
       --accent: #000481;
       --product-bg: #182229;
       --price-color: #00d4aa;
+      --border-color: #334;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -37,7 +38,7 @@
       justify-content: center;
     }
     .header img {
-      height: 40px;
+      height: 45px;
       width: auto;
     }
     .chat-container {
@@ -49,11 +50,11 @@
       gap: 0.8rem;
     }
     .message {
-      max-width: 75%;
-      padding: 0.8rem 1rem;
-      border-radius: 12px;
-      line-height: 1.5;
-      font-size: 0.98rem;
+      max-width: 78%;
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      line-height: 1.6;
+      font-size: 1rem;
       word-wrap: break-word;
       position: relative;
     }
@@ -70,103 +71,103 @@
       border-bottom-left-radius: 4px;
     }
     .city-tag {
-      font-size: 0.75rem;
-      opacity: 0.7;
-      margin-top: 6px;
+      font-size: 0.78rem;
+      opacity: 0.75;
+      margin-top: 8px;
       font-style: italic;
     }
+
     .product-card {
-      margin-top: 12px;
-      background: var(--product-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #334;
-      max-width: 280px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, #182229, #1e2a32);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      max-width: 320px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
     }
-    .product-image {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-    .product-info {
-      padding: 12px;
+    .product-card:hover {
+      transform: translateY(-4px);
     }
     .product-name {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 6px;
+      font-weight: 700;
+      font-size: 1.1rem;
       color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.4;
     }
     .product-price {
       color: var(--price-color);
       font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
     }
     .product-link {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--accent);
       color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: 0.2s;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.3s;
     }
     .product-link:hover {
       background: #0006a7;
+      transform: scale(1.05);
     }
+
     .chat-image {
-      max-width: 200px;
-      max-height: 200px;
-      border-radius: 10px;
-      margin-top: 8px;
+      max-width: 220px;
+      max-height: 220px;
+      border-radius: 12px;
+      margin-top: 10px;
       display: block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
     }
     .typing {
       font-style: italic;
       color: #8696a0;
       align-self: flex-start;
       background: var(--received);
-      padding: 0.6rem 1rem;
-      border-radius: 12px;
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
       border-bottom-left-radius: 4px;
     }
     .input-area {
-      display: flex;
-      flex-direction: column;
       padding: 0.8rem;
       background: var(--chat-bg);
-      gap: 0.5rem;
-      border-top: 1px solid #334;
+      border-top: 1px solid var(--border-color);
     }
     .input-row {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.6rem;
       align-items: center;
     }
     #userInput {
       flex: 1;
-      padding: 0.9rem 1.2rem;
+      padding: 0.95rem 1.3rem;
       border: none;
       border-radius: 30px;
       background: var(--input);
       color: white;
-      font-size: 1rem;
+      font-size: 1.02rem;
       outline: none;
     }
     .icon-btn, #sendBtn {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.3s;
     }
     .icon-btn {
       background: #010348;
@@ -178,30 +179,33 @@
       color: white;
     }
     #sendBtn.has-image { background: var(--accent); }
-    #sendBtn:hover { background: #0006a7; }
+    #sendBtn:hover { background: #0006a7; transform: scale(1.1); }
 
     .image-preview {
       display: flex;
       justify-content: flex-end;
       padding: 0 0.5rem;
+      margin-top: 6px;
     }
     .preview-img {
-      max-width: 80px;
-      max-height: 80px;
-      border-radius: 8px;
-      border: 2px solid var(--accent);
+      max-width: 90px;
+      max-height: 90px;
+      border-radius: 10px;
+      border: 3px solid var(--accent);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
     .remove-preview {
       background: #c00;
       color: white;
       border: none;
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      font-size: 0.8rem;
+      font-weight: bold;
       cursor: pointer;
-      margin-right: -10px;
-      margin-top: -10px;
+      margin-right: -12px;
+      margin-top: -12px;
+      font-size: 0.9rem;
     }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -246,7 +250,7 @@
     const previewImg = document.getElementById('previewImg');
     const removePreviewBtn = document.getElementById('removePreview');
 
-    const API_URL = "https://puresoftaiagent-production.up.railway.app/api/chat";
+    const API_URL = "https://puresoftaiagent-production-f7eb.up.railway.app/api/chat";
 
     let hasWelcomed = false;
     let selectedImage = null;
@@ -277,11 +281,10 @@
     function addMessage(text, type, city = null) {
       const msg = document.createElement('div');
       msg.className = `message ${type}`;
-      if (text) {
-        const textNode = document.createElement('div');
-        textNode.textContent = text;
-        msg.appendChild(textNode);
-      }
+      const textNode = document.createElement('div');
+      textNode.innerHTML = text.replace(/\n/g, '<br>');
+      msg.appendChild(textNode);
+
       if (city && !hasWelcomed) {
         const cityTag = document.createElement('div');
         cityTag.className = 'city-tag';
@@ -305,26 +308,30 @@
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function addProductCard(product) {
+    function addProductCardFromText(replyText) {
+      const productRegex = /(?:اسم المنتج|المنتج|اقترحت|هذا المنتج)[:\s]*([^|\n]+)[\s\S]*?سعر[:\s]*([0-9.,]+) جنيه?[\s\S]*?(?:رابط|لينك)[:\s]*(\S+)/i;
+      const match = replyText.match(productRegex);
+
+      if (!match) return;
+
+      const name = match[1].trim();
+      const price = match[2].trim() + " جنيه";
+      const url = match[3].trim();
+
       const card = document.createElement('div');
       card.className = 'product-card';
 
       card.innerHTML = `
-        <img src="${product.image}" class="product-image" alt="${product.name}" onerror="this.src='https://via.placeholder.com/280x180/182229/ffffff?text=صورة+غير+متاحة'">
-        <div class="product-info">
-          <div class="product-name">${product.name}</div>
-          <div class="product-price">${product.price}</div>
-          <a href="${product.url}" target="_blank" class="product-link">
-            شاهد المنتج <i class="fas fa-external-link-alt"></i>
-          </a>
-        </div>
+        <div class="product-name">${name}</div>
+        <div class="product-price">${price}</div>
+        <a href="${url}" target="_blank" class="product-link">
+          <i class="fas fa-shopping-cart"></i> شوف المنتج على أفاق ستورز
+        </a>
       `;
 
       const lastBotMsg = document.querySelector('.message.received:last-child');
       if (lastBotMsg) {
         lastBotMsg.appendChild(card);
-      } else {
-        chatBox.appendChild(card);
       }
       chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -333,7 +340,7 @@
       const typing = document.createElement('div');
       typing.className = 'typing';
       typing.id = 'typing';
-      typing.textContent = 'جاري الكتابة...';
+      typing.textContent = 'PureSoft بيفكر...';
       chatBox.appendChild(typing);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -378,14 +385,12 @@
 
         const botMsg = addMessage(data.reply, 'received', data.city);
 
-        if (data.suggested_product) {
-          addProductCard(data.suggested_product);
-        }
+        addProductCardFromText(data.reply);
 
       } catch (err) {
         console.error(err);
         removeTyping();
-        addMessage("مشكلة في الاتصال.. جرب تاني!", 'received');
+        addMessage("مشكلة في الاتصال.. جرب تاني بعد شوية!", 'received');
       }
 
       selectedImage = null;
@@ -398,7 +403,10 @@
       if (e.key === 'Enter') sendMessage();
     });
 
-    userInput.focus();
+    window.onload = () => {
+      addMessage("أهلًا يا وحش! أنا PureSoft AI، مساعدك الشخصي في اللبس والتسوق والجو 🌤️\nجرب تكلمني وشوف السحر!", 'received');
+      userInput.focus();
+    };
   </script>
 </body>
 </html>
